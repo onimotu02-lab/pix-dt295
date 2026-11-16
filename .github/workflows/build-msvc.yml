@@ -1,0 +1,25 @@
+name: build-msvc
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: x86_64-pc-windows-msvc
+      - name: Build BonDriver and tools
+        run: cargo build --release --locked --target x86_64-pc-windows-msvc
+      - name: Upload BonDriver_DT295
+        uses: actions/upload-artifact@v4
+        with:
+          name: BonDriver_DT295-x64
+          path: |
+            target/x86_64-pc-windows-msvc/release/BonDriver_DT295.dll
+            target/x86_64-pc-windows-msvc/release/dt295.exe
+            target/x86_64-pc-windows-msvc/release/bontest.exe
+            src/dt295-bondriver/BonDriver_DT295.ini
+          if-no-files-found: error
