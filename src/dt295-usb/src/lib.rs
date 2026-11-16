@@ -37,7 +37,7 @@ use usbfs as backend;
 
 /// PIX-DT295 USB vendor / product id.
 pub const VID: u16 = 0x06B8;
-pub const PID: u16 = 0x103B;
+pub const PID: u16 = 0x103C;
 
 /// Transport errors.
 #[derive(Debug, thiserror::Error)]
